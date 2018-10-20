@@ -1,0 +1,3 @@
+.htaccess
+Option -Indexes
+Untuk memblok folder jika tdk ada file index.php/index.html
