@@ -10,11 +10,10 @@ class App
 	protected $controller = 'Home';
 	protected $method = 'index';
 	protected $params = [];
+	//jalankan fungsi ini ketika class di inialisasi
 	function __construct()
 	{
-		//echo "OK";
 		//mengambil apapun yang ada di url
-		//var_dump($_GET);
 		//$url isi dgn kembalian methode parseURL
 		$url = $this->parseUrl();
 		//var_dump($url);
