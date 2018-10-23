@@ -1,11 +1,10 @@
 <?php
-$table = $data['table'];
-$id = $data['id']; 
-//panggil model crud nya
+echo "Ini Dari Table : " .$data['table']. " Dan Ber Id : ".$data['id'];
 require_once '../app/models/crud.php';
-//inialisasi class nya
-$crud = new Config;
-$data = $crud->Read($table,$id);
+$data = new Data;
+$result = $data->view();
+$no = 1;
+
 ?>
 
 <div class="container mt-5">
@@ -18,11 +17,11 @@ $data = $crud->Read($table,$id);
 				</tr>
 			</thead>
 			<tbody>
-			<?php $no=1; foreach ($data as $d) {?>
+			<?php foreach($result as $d) {?>
 				<tr>
-					<td><?= $d['mapel']; ?></td>
-					<td><?= $d['bab']; ?></td>
-					<td><?= $d['author']; ?></td>
+					<td><?= $no;?></td>
+					<td><?= $d['bab'] ?></td>
+					<td><?= $d['mapel'] ?></td>
 				</tr>
 				<?php $no++; } ?>
 			</tbody>
