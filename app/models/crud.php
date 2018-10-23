@@ -1,30 +1,37 @@
 <?php
 /**
- * Untuk Bagian CRUD nya disini
+ * Baginan CRUD nya sini Kang
+ * Untuk Sayangku ely
  */
-class Config extends mysqli
+class Data
 {
 	
-	public function __construct()
-	{
-		//memanggil koneksi yang berada di connect.php
-		$val = include 'connect.php';
-		//print_r($tes);
-		//memanggil fungsi construct pada parent / mysqli
-		//yang berisi perintah untuk konek ke db
-		parent::__construct($val['host'],$val['username'],
-			$val['password'],$val['db_name']);
-	}
-	public function Read($table, $id)
-	{
-		//panggil fungsi query bawaan dari parent
-		$proces = $this->query("SELECT  * FROM $table WHERE id = $id");
-		//definisikan result sebagai array
-		$result = array();
-		//loop hasilnya
-		while ($row = $proces->fetch_assoc()) {
-			$result[] = $row;
-		}
-		return $result;
-	}
+	/* method untuk menampilkan data siswa */
+    public function view()
+    {
+    	/* memanggil fungsi koneksi */
+    	require_once '../app/models/connect.php';
+    	/* method untuk menampilkan data siswa */
+    	$db = new db();
+    	/* panggil fungsi koneksinya */
+    	$mysqli = $db->connect();
+    	/* persiapkan perintah query */
+    	$query = "SELECT * FROM table_name";
+    	/* prepare query nya */
+    	$stmt = $mysqli->prepare($query);
+    	/* jika tdk berhasil prepare nya tampilkan pesan error */
+    	if (!$stmt) {
+    		die('Query Error: '.$mysqli->errno.'-'.$mysqli->error);
+    	}
+    	/* ekseskusi query nya */
+    	$stmt->execute();
+    	/* method untuk menampilkan data siswa */
+    	$result = $stmt->get_result();
+    	while ($data = $result->fetch_assoc()) {
+    		$hasil[] = $data;
+    	}
+    	$stmt->close();
+    	$mysqli->close();
+    	return $hasil;
+    }
 }
